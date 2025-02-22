@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 })
 
 router.post(
-  '/requirements/create',
+  '/requirements/create-single',
   async (req: Request, res: Response): Promise<void> => {
     try {
       const { nombre, codigo } = req.body
@@ -30,6 +30,37 @@ router.post(
       res
         .status(500)
         .json({ message: 'Error al crear el requerimiento', error })
+    }
+  }
+)
+
+router.get(
+  '/requirements/list',
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const requirements = await Requirements.find({})
+        .sort({ createdAt: -1 })
+        .lean()
+
+      res.status(201).json({ requirements })
+    } catch (error) {
+      res.status(500).json({ message: 'Error al listar requerimientos', error })
+    }
+  }
+)
+
+router.get(
+  '/requirements/obtain/:id',
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params
+      const requirements = await Requirements.findById(id)
+        .sort({ createdAt: -1 })
+        .lean()
+
+      res.status(201).json({ requirements })
+    } catch (error) {
+      res.status(500).json({ message: 'Error al listar requerimientos', error })
     }
   }
 )
