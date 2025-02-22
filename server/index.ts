@@ -1,18 +1,20 @@
-import dotenv from 'dotenv'
 import express from 'express'
 
 import routes from './routes'
 
-dotenv.config()
+import config from './config/app'
+
+import connectDB from './db'
 
 const app = express()
-const PORT = process.env.PORT || 3000
 
 // Middleware
 app.use(express.json())
 app.use('/api', routes)
 
+connectDB()
+
 // Servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`)
+app.listen(config.port, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${config.port}`)
 })
