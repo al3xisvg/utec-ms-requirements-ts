@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import config from '@/config/app'
+import config from '../config/app'
 
 const connectDB = async () => {
   try {

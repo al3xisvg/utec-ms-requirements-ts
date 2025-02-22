@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
 
-import Requirements from '@/models/requirements'
+import Requirements from '../models/requirements'
 
 const router = Router()
 
