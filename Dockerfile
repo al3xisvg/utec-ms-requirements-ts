@@ -12,5 +12,5 @@ WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/out ./out
 COPY .env .env
-EXPOSE 5001
+EXPOSE 5003
 CMD ["node", "out/index.js"]
